@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="seven columns">
+      <br />
+        <a href="/" class="th"><img src="../images/logotemp.png"></a>
+    </div>
+    <% if(user){%>
+    <div class="five columns">
+      <br /><br /><br />
+        <dl class="sub-nav" id="userMainMenu">
+          <dd><a href="/">Home</a></dd>
+          <dd class="active"><a href="/about">About Us</a></dd>
+          <dd><a href="/forum">Forum</a></dd>
+          <dd><a href="/logout">Log Out</a></dd>
+        </dl>
+
+    </div>
+
+    <% } else { %>
+
+    <div class="three columns">
+      <br /><br /><br />
+        <dl class="sub-nav">
+          <dd><a href="/">Home</a></dd>
+          <dd class="active"><a href="/about">About Us</a></dd>
+          <dd><a href="/forum">Forum</a></dd>
+        </dl>
+    </div>
+
+    <% } %>
+
+
+  </div>
+  <div class="row">
+    <h4>Sorry there has been a problem with you rrequest.</h4>
+    <p>Youtube is not allowing you access please check the following</p>
+
+    <p>check the clefnetwork has permissions <a href="https://accounts.google.com/b/0/IssuedAuthSubTokens?hl=en_US" target="_blank">here.</a> or go to <a href="http://www.clefnetwork.com/settings">settings.</a> and authorize the youtube account again.</p>
+  </div>

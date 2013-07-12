@@ -1,0 +1,107 @@
+<div id="homebody" class="background"></div>
+<div id="header">
+<div class="row">
+      <a href="/"><div id="logo"></div></a>
+    
+        <div class="sub-nav" id="mainMenu">
+          <div class="active menuButton"><a href="/"><i class="icon-home navIcon"></i><br /> Home</a></div>
+          <div class="menuButton"><a href="/about"><i class="icon-info-sign navIcon"></i><br />About Us</a></div>
+        </div>
+
+  </div>  
+</div>
+  <br />
+<br /><br /><br />
+<!-- ************************************** LOGIN FORM  ************************************** -->
+<div class="row">
+  <div class="four columns whitePanel">
+        <form  method="POST" action="/login" id="loginForm">
+              <h5>LOGIN</h5>
+              <br />
+              <input type="email" name="email" id="email" placeholder="name@email.com" required >
+              <input type="password" name="password" id="password" placeholder="password" required>
+              <a href="#" data-reveal-id="forgot" style="text-align:center;display:block;">Forgot your password?</a>
+              <br /><br />
+              <input type="submit" class="button pullCenter large-button" value="LOGIN">
+        </form>
+        <% if(message){%>
+            <div class="alert-box alert eight columns">
+              <%= message %>
+              <a href="" class="close">&times;</a>
+          </div>
+
+          <% } %>
+    </div>
+
+  <div class="nine columns"></div>
+</div>
+<br /><br />
+<div class="row">
+<!-- ************************************** REGISTRATION FORM  ************************************** -->
+    <div id="loginForm" class="four columns whitePanel">
+
+              <h5>NEW?</h5>
+              <br />
+              <a href="#" data-reveal-id="exampleModal" class="button pullCenter large-button">REGISTER!</a>
+              <br /><br /><br />
+    </div>
+  </div>
+</div>
+</div>
+<br /><br /><br />
+
+  <div id="forgot" class="reveal-modal">
+    <div class="modalContent">
+        <h4>Forgot your password?</h4>
+        <p>Don't worry, just enter the email address with which you signed up and we will email you your password</p>
+
+        <form class="custom" method="POST" action="/forgotpassword" id="forgotPWForm">
+          <input type="email" placeholder="email" class="eight" name="email">
+          <input type="submit" class="button">
+        </form>
+
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+<div id="exampleModal" class="reveal-modal">
+  <div class="modalContent">
+        <h4>JOIN CLEFNET</h4>
+        <form class="custom" method="POST" action="/register" id="registerForm" >
+          <input type="text" placeholder="Name" class="eight" name="newName" id="newName" >
+              <input type="email" placeholder="Email address" class="eight" name="newEmail" id="newEmail">
+              <input type="password" placeholder="password" class="eight" name="newPassword" id="newPassword" >
+              <input type="password" placeholder="confirm password" class="eight" name="confirmpassword" id="confirmpassword">
+              <input type="text" placeholder="instrument" class="eight" name="instrument" id="instrument">
+              <div class="row">
+                <div class="four columns">I am a </div>
+                <div class="four columns">
+                  <label for="radio4">
+                    <input name="role"  CHECKED  class="support attribute" type="radio" value="S"> Student
+                  </label>
+                </div>
+                <div class="four columns">
+                   <label for="radio5">
+                    <input name="role" type="radio" value="T"> Teacher
+                  </label>
+                </div>
+              </div>
+              <br />
+              <input type="submit" class="button">
+              <div class="alert-box alert" id="registerAlert">
+                  <span id="registerError"></span>
+                <a href="" class="close">&times;</a>
+              </div>
+
+        </form>
+        <div id="successMessage">
+            <h3>Thank you for Registering with ClefNetwork</h3>
+            <br />
+            <p>We have sent an email confirming your details to the email address provided</p>
+            <p>Once you click on the link provided in the email, your address will be confirmed and you may login. </p>
+        </div>
+
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+    </div>
+

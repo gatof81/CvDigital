@@ -1,0 +1,22 @@
+{
+  "name": "CvDigital",
+  "version": "0.0.1",
+  "dependencies": {
+      "express": "3.x",
+      "mongoose" : "latest",
+      "request" : "latest",
+      "ejs" : "latest",
+      "sendgrid": "latest",
+      "mongodb" : "latest",
+      "connect-mongodb": "latest",
+      "passport": "latest",
+      "passport-local": "latest",
+      "knox" : "latest",
+      "moment" : "latest",
+      "jsonp" : "latest"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm":  "1.3.2"
+  }
+}

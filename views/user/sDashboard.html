@@ -1,0 +1,183 @@
+<div class="row">
+    <div class="seven columns">
+      <br />
+      <a href="/" class="th"><img src="http://placehold.it/300x75"></a>
+    </div>
+    <div class="five columns">
+      <br /><br /><br />
+        <dl class="sub-nav" id="userMainMenu">
+          <dd class="active"><a href="/">Home</a></dd>
+          <dd><a href="/about">About Us</a></dd>
+          <dd><a href="/upgrade">Upgrade</a></dd>
+          <dd><a href="/settings">Settings</a></dd>
+          <dd><a href="/logout">Log Out</a></dd> 
+          
+        </dl>
+    </div>
+
+  </div>  
+<div class="row">
+  <br />
+
+
+  <div class="three columns">
+    <img src="http://placehold.it/240x240">
+    <br />
+    <h4><%= user.name %></h4>
+    <h5><%= user.instrument %></h5>
+    <ul class="nav-bar vertical">
+      <li class="active"><a href="#">Dashboard</a></li>
+      <li><a href="/student/profile">Profile</a> </li>
+      <li><a href="/inbox">Inbox</a> </li>
+      <li><a href="/friends">Friends</a></li>
+      <li><a href="/friends">Awards</a></li>
+      <li><a href="/sessions">Practice Sessions</a></li>
+    </ul>
+    <div class="panel">
+      <h5>Notifications</h5>
+      <p>Student A just uploaded a video</p>
+      <p>Student B just accepted your request</p>
+      <p>Student B joined ClefNetwork</p>
+    </div>
+  </div>
+  <div class="nine columns">
+    
+    <div class="row">
+      <% if(student.teacherRequests.length>0) {
+        for(i=0;i<student.teacherRequests.length;i++) { %>
+
+      <div class="twelve columns">
+        <div class="alert-box">
+          You have a teacher request from <%= student.teacherRequests[i] %> Would you like to accept ? <a href="/acceptTeacher/<%= i %>" class="secondary small button">Yes</a>
+          <a href="" class="close">&times;</a>
+        </div>
+      </div>
+
+      <%} }%>
+      <div class="seven columns">
+      <h5>Would you like to share your practice session?</h5>
+     </div>
+    <div class="four columns">
+      <a href="#" data-reveal-id="sessionModal" class="radius button">Add New Session</a>
+    </div>
+
+
+    </div>
+    <div class="row">
+
+      <div class="twelve columns">
+      <h3>Your Growth</h3>
+       <div id="growthChart"></div>
+      <br /><br /><br />
+      <div class="row">
+        <div class="six columns">
+          <div class="panel">
+            <h5>Total Times Practiced</h5>
+            <h1><%= student.sessions.length %></h1>
+          </div>
+        </div>
+        
+        <div class="six columns">
+          <div class="panel">
+            <h5>Total Hours Practiced</h5>
+            <h1><% 
+              totalHours=0
+              for(var i=0;i<student.sessions.length;i++){
+                totalHours+= parseInt(student.sessions[i].mins)
+              }
+                totalHours=totalHours/60;
+                totalHours=Math.round(totalHours*100)/100
+              %>
+              <%= totalHours %>
+            </h1>
+          </div>
+        </div>
+
+        <div class="six columns">
+          <div class="panel">
+            <h5>Awards you've received</h5>
+            <h1>0</h1>
+          </div>
+        </div>
+
+        <div class="six columns">
+          <div class="panel">
+            <h5>Friends you are following</h5>
+            <h1>0</h1>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="sessionModal" class="reveal-modal">
+  <div class="row">
+    <div class="twelve columns">
+      <h3>Add New Session</h3>
+      <form class="custom" method="POST" action="/addNewSession">
+        <fieldset>
+        <input type="text" placeholder="Name of Piece" name="pieceName" id="pieceName"/>
+        <input type="text" class="twelve" placeholder="Link to SoundCloud" id="soundCloud" name="soundCloud"/>
+        <input type="text" class="twelve" placeholder="Link to Youtube Video" id="youTube" name="youTube" />
+        <p>Set your video <strong>privacy settings</strong> to <strong>unlisted</strong> unless you want your video to be searchable on Youtube</p>
+        <div class="row">
+          <div class="five columns"><br />Time spent practicing</div>
+         <input type="text" placeholder="0" class="three columns" name="mins" id="mins" /> <div class="three columns"><br />minutes</div>
+       </div>
+       <br />
+            <div class="row">
+              <div class="three columns">
+                  Viewable by: 
+              </div>
+              <div class="three columns">
+                <label for="radio1"class="support tag close">
+                  <input name="privacy" CHECKED type="radio" id="radio1" style="display:none;" value="private"><span class="custom radio"></span> Private
+                </label>
+              </div>
+              <div class="three columns">
+                <label for="radio1"class="support tag close">
+                  <input name="privacy" type="radio" id="radio1" style="display:none;" value="friends"><span class="custom radio"></span> 
+                  Friends
+                </label>
+              </div>
+              <div class="three columns">
+                <label for="radio1"class="support tag close">
+                  <input name="privacy" type="radio" id="radio2" style="display:none;" value="public"><span class="custom radio"></span> 
+                  Public
+                </label>
+              </div>
+            </div>
+            <br />
+        <textarea placeholder="Description" name="description" id="description"></textarea>
+        <br />
+        <input type="submit" class="button centered" value="Add new session" />
+        <br /> <br />
+      </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <a class="close-reveal-modal">&#215;</a>
+ </div>
+
+ <script type="text/javascript">
+var day_data = [
+
+  <% for(var i=0;i<student.sessions.length;i++){     %>
+    {"period": "<%= student.sessions[i].date %>", "session": <%= student.sessions[i].mins %>},
+  <% }%>
+];
+Morris.Line({
+  element: 'growthChart',
+  data: day_data,
+  xkey: 'period',
+  ykeys: ['session'],
+  labels: ['Mins Practiced']
+});
+
+ </script>

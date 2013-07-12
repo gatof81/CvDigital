@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="seven columns">
+      <br />
+      <a href="/" class="th"><img src="http://placehold.it/300x75"></a>
+    </div>
+    <div class="five columns">
+      <br /><br /><br />
+        <dl class="sub-nav" id="userMainMenu">
+          <dd class="active"><a href="/">Home</a></dd>
+          <dd><a href="/about">About Us</a></dd>
+          <dd><a href="/upgrade">Upgrade</a></dd>
+          <dd><a href="/settings">Settings</a></dd>
+          <dd><a href="/logout">Log Out</a></dd> 
+          
+        </dl>
+  </div>
+</div>  
+
+<div class="row">
+  <br />
+  <div class="three columns">
+    <img src="http://placehold.it/240x240">
+    <br />
+    <h4><%= user.name %></h4>
+    <h5><%= user.instrument %></h5>
+    <ul class="nav-bar vertical">
+      <li><a href="/">Dashboard</a></li>
+      <li class="active"><a href="/student/profile">Profile</a> </li>
+      <li><a href="/inbox">Inbox</a> </li>
+      <li><a href="/friends">Friends</a></li>
+      <li><a href="/friends">Awards</a></li>
+      <li><a href="/sessions">Practice Sessions</a></li>
+    </ul>
+    <div class="panel">
+      <h5>Notifications</h5>
+      <p>Student A just uploaded a video</p>
+      <p>Student B just accepted your request</p>
+      <p>Student B joined ClefNetwork</p>
+    </div>
+  </div>
+  <div class="nine columns">
+    <div class="alert-box secondary">
+      This is how your profile will appear to others
+      <a href="" class="close">&times;</a>
+    </div>
+    <div class="row">
+      <div class="ten columns">
+        <h3><%= user.name %></h3>
+      </div>
+      <div class="one columns">
+        <a href="#" data-reveal-id="editNameModal" class="small radius button">Edit</a>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+            <div class="panel">
+                <div class="row">
+                  <div class="nine columns">
+                      <h4>About Me</h4>
+                  </div>
+                  <div class="three columns">
+                    <a href="#" data-reveal-id="editAboutModal" class="small radius button">Edit</a>
+                     
+                  </div>
+                </div>
+                <p><%= user.about %></p>
+                <br />
+                <p><strong>Email :</strong> <%= user.email %></p>
+                <p><strong>Instrument: </strong> <%= user.instrument %></p>
+            </div> 
+    </div> 
+    <div class="row">
+      <h3>Students</h3>
+        <% for(var i=0;i<students.length;i++){ %>
+
+          <div class="three column">
+            <img src="http://placehold.it/180x180">
+            <h5><%= students[i].name %></h5>
+            <%= students[i].instrument %><br />
+            <h6><a href="mailto:<%= students[i].email %>" >Email</a></h6>
+
+          </div>
+
+         <% }%>
+    </div>  
+  </div>
+</div>
+
+
+<div id="editNameModal" class="reveal-modal">
+  <h2>Edit Name</h2>
+  <form class="custom" method="POST" action="/editName">
+          <br />
+          <label>Your name as you would like it to appear on your profile</label>
+          <br />
+          <input type="text" value="<%= user.name %>" name="editName" id="editName"/>
+          <br />
+          <input type="submit" class="button centered" value="Edit" />
+          <br />
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+<div id="editAboutModal" class="reveal-modal">
+  <h2>Edit About</h2>
+  <form class="custom" method="POST" action="/editAbout">
+          <br />
+          <label>Enter a brief description about yourself.</label>
+          <br />
+          <textarea value="<%= user.about %>" name="editAbout" rows="5"><%= user.about %></textarea>
+          <br />
+          <input type="submit" class="button centered" value="Edit" />
+          <br />
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

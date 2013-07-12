@@ -1,0 +1,71 @@
+
+<!-- START OF HEADER -->
+
+<div class="row">
+  <!-- Logo -->
+  <div class="seven columns">
+    <br />
+    <a href="/" class="th"><img src="http://placehold.it/300x75"></a>
+  </div>
+ <!-- Top Nav -->
+  <div class="five columns">
+    <br /><br /><br />
+    <dl class="sub-nav" id="userMainMenu">
+      <dd class="active"><a href="/">Home</a></dd>
+      <dd><a href="/about">About Us</a></dd>
+      <dd><a href="/upgrade">Upgrade</a></dd>
+      <dd><a href="/settings">Settings</a></dd>
+      <dd><a href="/logout">Log Out</a></dd> 
+    </dl>
+  </div>
+
+</div>
+
+<!-- END OF HEADER -->
+
+<div class="row">
+  <br />
+  <!-- LEFT COLUMN -->
+  <div class="three columns">
+    <img src="http://placehold.it/240x240">
+    <br />
+    <h4><%= user.name %></h4> <!-- USER NAME -->
+    <h5><%= user.instrument %></h5> <!-- USER INSTRUMENT -->
+
+    <!-- VERTICAL MENU -->
+    <ul class="nav-bar vertical">
+      <li class="active"><a href="#">Dashboard</a></li>
+      <li><a href="/teacher/profile">Profile</a> </li>
+      <li><a href="/inbox">Inbox</a> </li>
+      <li><a href="/teacher/students">Students</a></li>
+      <li><a href="/teacher/awards">Awards</a></li>
+    </ul>
+    <!-- NOTIFICATIONS -->
+    <div class="panel">
+      <h5>Notifications</h5>
+      <p>Student A just uploaded a video</p>
+      <p>Student B just accepted your request</p>
+      <p>Student B joined ClefNetwork</p>
+      <p>Student C sent you a message</p>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="nine columns">
+    <form  method="POST" action="/addNewStudent"> <!-- ADD NEW STUDENT FORM -->
+      <div class="row collapse">
+        <div class="eight mobile-three columns">
+          <input type="email" placeholder="Enter email id of student you wish to add" name="studentEmail" id="studentEmail"/>
+        </div>
+        <div class="four mobile-four columns">
+          <input type="submit" class="button expand postfix" value="Add New Student" />
+        </div>
+      </div>
+      <p class="subheader">
+        If the student hasn't already joined ClefNetwork, they will recieve an email requesting they signup 
+      </p>
+    </form>
+  </div>
+  <!-- TIMELINE -->
+  <iframe src='http://embed.verite.co/timeline/?source=0Agl_Dv6iEbDadHdKcHlHcTB5bzhvbF9iTWwyMmJHdkE&font=Bevan-PotanoSans&maptype=toner-lines&lang=en&start_at_end=true&width=720&height=650' width='720' height='650' frameborder='0'></iframe>
+</div>
