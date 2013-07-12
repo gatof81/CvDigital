@@ -36,6 +36,12 @@ module.exports = function(app) {
     });
 
     /*********** USER ROUTES ************/ 
+    
+    app.post('/register', userRoute.register);
+
+    app.get('/confirm/:userid', userRoute.confirmAccount);
+
+    app.post('/forgotpassword', userRoute.forgotPW)
  
     //any route should redirect to not found page.
     app.get('*', siteRoute.pageNotFound );

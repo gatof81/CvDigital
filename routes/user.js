@@ -23,23 +23,21 @@ module.exports = {
             var SendGrid = require('sendgrid').SendGrid;
             var sendgrid = new SendGrid(username, key);
 
-            var addText = 'Hello,'+'<br /><br />'+'Thank you so much for registering with ClefNetwork.';
-            addText+='<br />'+'To activate your account, please <a href="http://clefnetwork.com/confirm/'+user._id+'">CLICK HERE</a>';
-            addText+='<br />'+'<br />'+'The ClefNetwork Team';
+            var addText = 'Hello,'+'<br /><br />'+'Thank you so much for registering with CvDigital.';
+            addText+='<br />'+'To activate your account, please <a href="http://cvdigital.herokuapp.com/confirm/'+user._id+'">CLICK HERE</a>';
+            addText+='<br />'+'<br />'+'The CvDigital Team';
 
 
             sendgrid.send({
               to: request.body.newEmail,
-              from: 'info@clefnetwork.com',
-              subject: 'Activate your ClefNetwork account',
+              from: 'info@cvdigital.com',
+              subject: 'Activate your CvDigital account',
               html: addText
 
             }, function(success, message) {
               if (!success) {
-
               }
               else{
-
                 response.send("success");
               }
             });
@@ -57,77 +55,12 @@ confirmAccount: function(request,response){
     if(user) {
       user.validated=true;
       user.save();
-
-      if(user.role=='S') {
-      //assign teacher if there are pending teacher requests
-      db.Student.findOne({email : user.email}).run(function(err, student){
-
-        if (student == null ) {
-          console.log('post not found');
-          response.send("uh oh, can't find that post");
-        }
-        else {
-
-          db.Teacher.findOne({ "pendingRequests": { "$in": [student.email] }} ).run(function(err, teacher){
-            if(teacher!==null){
-              teacher.students.push(student._id);
-              var requestPosition = 0;
-              for(var i=0;i<teacher.pendingRequests.length;i++){
-                if(teacher.pendingRequests[i]==user.email){
-                  requestPosition=i;
-                }
-              }
-              var pendingRequests = teacher.pendingRequests;
-              pendingRequests.splice(requestPosition,1);
-              db.Teacher.update({email : teacher.email}, {"$set" : {pendingRequests : pendingRequests}});
-              teacher.save();
-              student.teacher = teacher._id;
-              student.teacherName = teacher.name;
-              student.save();
-            }
-
-            response.render('site/confirmation.html');
-
-          });
-        }
-
-      });
-}
-}
-else {
-  response.send("User does not exists.");
-}
-
-});
-
-
-},
-
-viewProfile: function(request,response){
-
-  db.Student.findOne({_id : request.params.profileID}).run(function(err, student){
-    if(request.user.role=="T"){
-      db.Teacher.findOne({email : request.user.email }).run(function(err, teacher){
-        var templateData = {
-          student : student,
-          teacher : teacher,
-          user : request.user
-        }
-        response.render('teacher/viewProfile.html', templateData);
-      });
-    }
-    else{
-      db.Student.findOne({email : request.user.email }).run(function(err, user){
-        var templateData = {
-          student : student,
-          user : user
-        }
-        response.render('student/viewProfile.html', templateData);
-      });
+      response.render('site/confirmation.html');
+    }else {
+      response.send("User does not exists.");
     }
   });
 },
-
 
 forgotPW : function(request,response){
 

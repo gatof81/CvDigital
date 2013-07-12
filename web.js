@@ -12,7 +12,7 @@ global.app = app;
 
 var DB = require('./accessDB');
 var db = new DB.startup('mongodb://diegof18:136048nm@ds035438.mongolab.com:35438/heroku_app16857097');
-
+console.log('here');
 var moment = require('moment');
 
 // Configuration
@@ -33,7 +33,7 @@ app.configure(function(){
     /*** Turn on Express Sessions - Use MongoStore ***/
     app.use(express.session({ 
     store: new mongoStore({url:'mongodb://diegof18:136048nm@ds035438.mongolab.com:35438/heroku_app16857097', maxAge: 300000})
-    , secret: 'YOURSECRETHASH'
+    , secret: 'wBjraPb6pw9XD2ahe6doFoyT67ceX0dR'
   }, function() {
             app.use(app.router);
         })
