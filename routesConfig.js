@@ -26,7 +26,7 @@ module.exports = function(app) {
 
     app.get('/about', siteRoute.aboutPage);
 
-    app.get('/user/:user', siteRoute.logedIn);
+    //app.get('/user/:user', siteRoute.logedIn);
 
     app.post('/login', passport.authenticate('local', { failureRedirect: '/', failureFlash: true }),
     function(request, response) { 

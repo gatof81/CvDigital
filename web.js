@@ -24,7 +24,7 @@ app.configure(function(){
     app.set('views', __dirname + '/views'); //store all templates inside /views
     app.set('view engine', 'ejs'); // ejs is our template engine
     app.set('view options',{layout:true}); // use /views/layout.html to manage your main header/footer wrapping template
-    app.engine('html', require('ejs').renderFile); //use .html files in /views instead .ejs extension
+    app.register('html',require('ejs')); //use .html files in /views instead .ejs extension
     
     app.use(express.cookieParser());//Cookies must be turned on for Sessions
     app.use(express.bodyParser());
