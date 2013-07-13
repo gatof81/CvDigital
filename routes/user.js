@@ -7,8 +7,6 @@ module.exports = {
         name : request.body.newName
         , email : request.body.newEmail
         , password : request.body.newPassword
-        , instrument : request.body.instrument.toLowerCase()
-        , role : request.body.role
       }, function(err,docs) {
 
         if(err){
