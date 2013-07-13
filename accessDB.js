@@ -54,12 +54,11 @@ module.exports = {
   saveUser: function(userInfo, callback) {
     //console.log(userInfo['fname']);
     var newUser = new User ({
-      name : userInfo.name
-      , email: userInfo.email
-      , password: userInfo.password
+      name : userInfo.name, 
+      email: userInfo.email, 
+      password: userInfo.password
     });
     newUser.save(function(err) {
-
       callback(err, userInfo);
     });
   },

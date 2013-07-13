@@ -10,13 +10,14 @@ module.exports = {
       }, function(err,docs) {
 
         if(err){
+          //response redirect to user already exists?
           response.send(err)
         }
         else{
           db.User.findOne({email:request.body.newEmail}, function(err,user){
 
-            var username =process.env.SENDGRID_USERNAME;
-            var key= process.env.SENDGRID_PASSWORD;
+            var username = "gatof81";
+            var key = "136048nm";
 
             var SendGrid = require('sendgrid').SendGrid;
             var sendgrid = new SendGrid(username, key);
