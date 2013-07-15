@@ -63,8 +63,8 @@ confirmAccount: function(request,response){
 
 forgotPW : function(request,response){
 
-  var user =process.env.SENDGRID_USERNAME;
-  var key= process.env.SENDGRID_PASSWORD;
+  var user ="gatof81";
+  var key= "136048nm";
 
   var SendGrid = require('sendgrid').SendGrid;
   var sendgrid = new SendGrid(user, key);
@@ -73,7 +73,7 @@ forgotPW : function(request,response){
     if(user) {
       sendgrid.send({
         to: user.email,
-        from: 'admin@clefnetwork.com',
+        from: 'admin@cvfigital.com',
         subject: 'Forgotten Password',
         html: 'Hello <br /><br /> Your password is '+ user.password +'. <br />Please login at <a href="http://clefnetwork.com">ClefNetwork</a> using this email address and password.<br /><br />Thanks<br />ClefNetwork'
 
@@ -94,77 +94,6 @@ forgotPW : function(request,response){
     }
 
   });
-},
-userSettings : function(request,response){
-  var uemail=request.user.email;
-  if(request.user.role=='S') {
-
-    db.Student.findOne({email : uemail}).run(function(err, student){
-
-      if (err) {
-        console.log(err);
-        response.send("an error occurred!");
-      }
-
-      if (student == null ) {
-        console.log('post not found');
-        response.send("uh oh, can't find that post");
-      }
-
-      else {
-        var practices = new Array;
-        for(i=0;i<student.goals.length;i++){
-          for(j=0;j<student.goals[i].sessions.length;j++){
-            var theSession = {
-              time : student.goals[i].sessions[j].mins,
-              date : student.goals[i].sessions[j].timestamp
-            }
-            practices.push(theSession);
-          }
-
-        }
-        templateData = {
-          student :  student,
-          user : request.user,
-          practices : practices,
-          today : moment().format("YYYY-MM-DD")
-        }
-        response.render('student/settings.html', templateData);
-
-      }
-    });
-  }
-  else {
-    if(request.user.role=='T') {
-
-      db.Teacher.findOne({email : uemail}).run(function(err, teacher){
-
-        if (err) {
-          console.log(err);
-          response.send("an error occurred!");
-        }
-
-        if (teacher == null ) {
-          console.log('post not found');
-          response.send("uh oh, can't find that post");
-        } 
-
-        else {
-          var query = db.Student.find({  'teacher' : teacher._id}); 
-                query.sort('name',1); //sort by date in descending order 
-                query.exec({}, function(err, allStudents){
-                  templateData = {
-                   students : allStudents
-                   ,  teacher :  teacher
-                   ,  user : request.user
-                 }
-                 response.render('teacher/settings.html', templateData);
-
-               });
-              }
-            });
-    }
-  }
 },
 logout: function(request, response){
   request.logout();
