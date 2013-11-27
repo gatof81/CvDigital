@@ -1,4 +1,5 @@
 // base dependencies for app
+require('newrelic');
 var express = require('express')
   , passport = require('passport')
   , mongoose = require('mongoose')

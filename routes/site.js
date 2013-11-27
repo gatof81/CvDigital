@@ -25,13 +25,7 @@ module.exports = {
     mainpage : function(request, response) {
          
          if(request.user){
-            if(request.user.role=='T'){
-                response.redirect('/teacher/dashboard');
-            }
-            else{
-                response.redirect('/student/dashboard');
-
-            }
+            response.redirect('/userlogged');
          }
          else{
 

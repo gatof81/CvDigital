@@ -35,6 +35,7 @@ module.exports = {
 
             }, function(success, message) {
               if (!success) {
+                response.send("fail");
               }
               else{
                 response.send("success");
